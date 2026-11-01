@@ -8,6 +8,59 @@
 
 Bộ màu thương hiệu cá nhân của nguyen0xhieu, dùng cho mọi thiết kế: web, app, slide, ảnh mạng xã hội. Gốc của cả bộ là **0x Blue** (`blue`, #1E6DF7). Đây là màu xanh nằm đúng điểm cân bằng giữa trắng và đen, nên đặt trên nền trắng hay nền đen đều đọc được.
 
+## Hai chế độ thiết kế web — chốt 2026-11-01
+
+**Chọn chế độ trước khi thiết kế, theo mục đích của trang.** Cả hai dùng nguyên bộ màu Light/Dark, font, icon, ngữ nghĩa trạng thái và token shadow hiện có. Không đổi màu để biểu thị chế độ. Thông số máy đọc nằm ở `tokens.json → webProfiles`.
+
+| Chế độ | Dùng cho | Mục tiêu |
+|---|---|---|
+| `spacious` — thoáng | CV, portfolio, landing page, trang giới thiệu | Đọc câu chuyện, phân cấp nội dung, CTA rõ |
+| `compact` — tối ưu diện tích | Valuation, dashboard, bảng số liệu, Work/Airdrop, công việc, Admin | Quét, so sánh và thao tác trên nhiều thông tin hữu ích |
+
+Một website có thể dùng cả hai: **CV → spacious; Valuation và Work/Airdrop → compact**. Một trang có hero giới thiệu và bảng dữ liệu có thể chọn theo từng vùng; spacing của hero không lan vào bảng. Chế độ không thay đổi chỉ vì chuyển desktop sang mobile.
+
+### Thông số bắt buộc theo chế độ
+
+Tất cả kích thước dưới đây là CSS px; chiều cao dòng/ô là **tối thiểu**, được tăng theo nội dung.
+
+| Thành phần | `spacious` | `compact` |
+|---|---|---|
+| Nhịp spacing | Bội số 8 | Bội số 4; cho phép 4 và 12 |
+| Khung desktop | Tối đa 1200, ở 1440 lề 120, rãnh 24 | Co giãn theo khung, đệm ngang 24; không bắt buộc giới hạn 1200 |
+| Lề mobile | 16 | 16 |
+| Đệm section dọc desktop / mobile | 96 / 48 | Đệm trang 16 / 12; nhóm cách 16, section cách 24 |
+| Khoảng giữa các khối desktop / mobile | 64 / 32 | 16 / 12 giữa panel |
+| Đệm thẻ desktop / mobile | 32 (thẻ nhỏ 24) / 16 | 12; panel nhỏ 8 |
+| Tiêu đề trang desktop / mobile | Chọn `web-h1`/`web-h2`, mobile tương ứng; CV có thể dùng cấp nhỏ hơn theo nội dung | `web-h3` 24/32 / `web-h4` 20/28 |
+| Tiêu đề panel | `web-h4` 20/28 | `web-nav-button` 16/24; nhãn nhóm nhỏ `web-label` 14/20 |
+| Chữ nội dung | `web-body` 16/24 | Văn bản 16/24; dữ liệu 14/20; không giảm nội dung dưới 14 |
+| Header panel / bảng | Theo nội dung và nhịp 8 | Tối thiểu 40; tăng nếu tiêu đề cần xuống dòng |
+| Dòng danh sách / bảng một dòng | Tối thiểu 56 | Bảng mặc định 40; desktop dày dữ liệu có thể 32; nhãn–giá trị 32 |
+| Dòng hai dòng / task | Theo nội dung, tối thiểu 56 | Hai dòng tối thiểu 48; task tối thiểu 40, tự cao theo chữ |
+| Nút chính / toolbar | 48 / 40; CTA hero 56 | 40 / 32; vùng chạm độc lập xem quy tắc dưới |
+| Ô nhập | 48 | 40; input chữ trên mobile vẫn 16px |
+| Bo góc | `radius-md` 16 | Panel 16; nút/ô nhỏ `radius-sm` 8; dòng dữ liệu không bo mặc định |
+| Dòng trong panel | Có thể dùng thẻ/nền riêng | Mặc định khe 0, kẻ mảnh bằng `line`; nhãn và số thẳng cột |
+| Chiều cao panel | Theo nội dung | Theo nội dung; không ép bằng nhau và không thêm dòng rỗng |
+
+### Quy tắc sử dụng compact
+
+- **Giảm khoảng trống trước khi giảm chữ.** Số liệu dùng `tabular-nums`, canh phải; nhãn canh trái, header theo cột. Chữ phải hiện đủ, task được xuống dòng; không ép chiều cao cố định làm mất nội dung.
+- Khối chỉ để đọc không phải có chiều cao của nút. Nút toolbar có hình nhìn thấy cao 32 vẫn phải có vùng chạm **ít nhất 44×44**, không chồng lên mục bên cạnh; nếu không đủ chỗ thì tăng kích thước hoặc nhóm bớt hành động.
+- Không áp quy tắc nút native app rộng 296px vào dashboard web. Hành động compact rộng theo nội dung hoặc panel.
+- Bỏ shadow từng dòng, bỏ thẻ bo góc cho từng con số. Dùng `line`, canh hàng và nhóm nội dung để phân tách; chỉ dùng shadow hiện có ở vùng thực sự nổi.
+- Mobile có thể 2 panel/hàng khi đọc đủ nhãn và số. Panel có nhãn dài hoặc form được chiếm cả hàng. Kiểm tra ít nhất 320/360/390px, VI/EN nếu có, trạng thái rỗng và dữ liệu dài.
+- Toolbar được yêu cầu một hàng thì phải giữ một hàng: thu đệm/nút trước, tiêu đề co theo thang 20 → 18 → 16 → 14. Nếu vẫn thiếu, dùng nhãn ngắn đã duyệt hoặc menu hành động; không tự thu chữ số liệu dưới 14, cắt chữ hay làm mất nút.
+- Danh sách dài có thể cuộn trong vùng giới hạn có chủ đích. Không cố định chiều cao mọi box để đẹp hàng, không `padRows()` đệm dòng trống. Kiểm tra lượng dữ liệu hữu ích xuất hiện và tránh nhiều vùng cuộn lồng nhau.
+- Không tự tạo điểm số, biểu đồ, badge hay box chỉ để lấp chỗ; mỗi phần phải giúp người xem đọc, so sánh hoặc thực hiện công việc.
+
+### Phạm vi và thứ tự ưu tiên
+
+- Quy tắc màu/chữ/ngữ nghĩa dùng chung; hình học web chọn từ `webProfiles.spacious` hoặc `webProfiles.compact`.
+- Các bảng “Website” về lề/section/button/box ở phần dưới là **mặc định spacious**, không áp cho compact. App native và slide giữ nguyên quy tắc riêng.
+- Nếu sản phẩm có ngoại lệ được duyệt, ghi rõ phạm vi trong tài liệu sản phẩm; không biến ngoại lệ đó thành mặc định toàn bộ design system.
+- Token/profile trong repo là nguồn cho hai chế độ mới. Figma hiện có chưa được đồng bộ các token 4/12, radius 8 và profile compact; không tuyên bố Figma đã có những cập nhật này.
+
 ## Màu xanh đặc trưng
 
 - `blue` là màu nhận diện. Màu này giữ **nguyên một giá trị ở cả giao diện sáng lẫn tối**, đạt 4.58:1 trên trắng và 4.59:1 trên đen (chuẩn chữ thường là 4.5:1).
@@ -98,13 +151,13 @@ Mỗi màu có 3 bậc:
 
 ## Lề, lưới và khoảng cách
 
-- Mọi khoảng cách là bội số của 8:
+- Với web spacious, app native và slide, khoảng cách là bội số của 8 (web compact dùng nhịp 4 theo bảng hai chế độ phía trên):
   - `space-8`: icon cách chữ;
   - `space-16`: lề mobile, padding thẻ;
   - `space-24`: khoảng giữa các thẻ, rãnh cột web;
   - `space-32`: khoảng giữa các nhóm trong màn app;
   - `space-48`, `space-64`, `space-96`, `space-128`: các khoảng lớn của web và slide (xem bảng dưới).
-- Bo góc `radius-md` 16px cho mọi thẻ, ô và nút. Pill và hình tròn dùng `radius-pill`.
+- Spacious và app dùng `radius-md` 16px cho thẻ, ô và nút. Compact dùng panel 16, ô/nút nhỏ `radius-sm` 8, dòng dữ liệu không bo. Pill và hình tròn dùng `radius-pill`.
 
 | Khung | Chiều rộng | Chiều cao / nhịp dọc |
 |---|---|---|
@@ -148,7 +201,7 @@ Màu, áp dụng chung cho cả 3 loại khung:
 
 ## File Figma
 
-Toàn bộ quy định đã có trong file Figma `hieu`: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Tên mỗi style đều theo mẫu `Nhóm/Tên — công dụng · thông số`, nên chỉ cần đọc tên là biết dùng ở đâu.
+Bộ gốc đã có trong file Figma `hieu`; hai profile web và token compact bổ sung ngày 2026-11-01 chưa được đồng bộ sang Figma: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Tên mỗi style đều theo mẫu `Nhóm/Tên — công dụng · thông số`, nên chỉ cần đọc tên là biết dùng ở đâu.
 
 | Trang | Nội dung |
 |---|---|
