@@ -141,3 +141,7 @@ User overrides neutral header surfaces: Work card headers, Valuation panel/table
 ### Approved accent text
 
 0xhieu.xyz accent text uses the same product orange #FFA111, weight600. Do not substitute earth-orange #B84A0C for emphasis. Orange header backgrounds use black text. Global palette tokens for other products remain unchanged.
+
+## Current 0xhieu.xyz blue theme — user decision 2026-11-01
+
+Supersedes previous orange rules: black normal text, grey secondary text, blue important text. Use existing cobalt #1E6DF7 for primary actions/header fills and blue-strong #0F3DB2 for small important text on grey/tinted surfaces. White page, grey mist card/popup bodies, cobalt headers with on-blue/white text, blue-soft DAILY. Header interactive text remains white on hover; use underline instead of same-color blue text. Cards/labels remain flat, buttons keep approved drop shadows. Red is only semantic danger/destructive feedback. Preserve approved geometry, all source data/formulas, and original logo/photo artwork.
