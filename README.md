@@ -121,3 +121,7 @@ Chạy `python export_web.py`; commit token và CSS xuất cùng nhau. Hash dùn
 QA tối thiểu: desktop1440/1024/768 và mobile640/390/360/320; các ngôn ngữ; dữ liệu rỗng/dài; không cắt chữ/tràn cột; đủ link/action; hover/focus; vùng chạm; popup; navbar và back/forward. Xem ảnh thật, không chỉ báo lint. Test component phải kiểm tra vai trò/layout, không chỉ khớp một con số rời rạc.
 
 Figma gốc: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Token v3 và pattern mới **chưa được đồng bộ sang Figma**; không tuyên bố file Figma đã chứa thay đổi này.
+
+## 0xhieu.xyz — workspace alignment approved 2026-11-01
+
+Valuation and Work share the product workspace tokens: max frame1280px including padding, radius8, neutral white card headers, line border, horizontal card padding12, section padding8 and card gap12. Work uses independent cards: desktop2 columns, mobile1 (<=900px), DAILY yellow-soft with orange-text label. Reference chosen by user: [Linear Board](https://linear.app/docs/board-layout). Valuation retains 8 visible rows, 56px headers, fixed328px panels and its existing panel column counts. These product decisions supersede earlier product list/fluid-layout guidance; do not apply them to unrelated products without approval.
