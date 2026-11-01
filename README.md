@@ -116,7 +116,7 @@ Giữ nguyên token chuyên biệt hiện có: app scale14/16/18/22/28/34/48, bo
 
 ## Export, kiểm tra và thay đổi
 
-Chạy `python export_web.py`; commit token và CSS xuất cùng nhau. Website phải đồng bộ bản CSS và ghi phiên bản, không đọc remote CSS runtime. Dùng nguồn JSON để kiểm tra màu không bị đổi ngoài scope.
+Chạy `python export_web.py`; commit token và CSS xuất cùng nhau. Hash dùng JSON canonical (sort key, bỏ whitespace), không phụ thuộc CRLF/LF của Windows/Linux. Website phải đồng bộ bản CSS và ghi phiên bản, không đọc remote CSS runtime. Dùng nguồn JSON để kiểm tra màu không bị đổi ngoài scope.
 
 QA tối thiểu: desktop1440/1024/768 và mobile640/390/360/320; các ngôn ngữ; dữ liệu rỗng/dài; không cắt chữ/tràn cột; đủ link/action; hover/focus; vùng chạm; popup; navbar và back/forward. Xem ảnh thật, không chỉ báo lint. Test component phải kiểm tra vai trò/layout, không chỉ khớp một con số rời rạc.
 
