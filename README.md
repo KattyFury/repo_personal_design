@@ -125,3 +125,7 @@ Figma gốc: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Token v3 
 ## 0xhieu.xyz — workspace alignment approved 2026-11-01
 
 Valuation and Work share the product workspace tokens: max frame1280px including padding, radius8, neutral white card headers, line border, horizontal card padding12, section padding8 and card gap12. Work uses independent cards: desktop2 columns, mobile1 (<=900px), DAILY yellow-soft with orange-text label. Reference chosen by user: [Linear Board](https://linear.app/docs/board-layout). Valuation retains 8 visible rows, 56px headers, fixed328px panels and its existing panel column counts. These product decisions supersede earlier product list/fluid-layout guidance; do not apply them to unrelated products without approval.
+
+### Shared component identity across all three pages
+
+For 0xhieu.xyz, `sharedComponents` applies to CV as well as Valuation and Work: card/control/badge radius8, white surface, line border, no decorative card shadow. Spacious and compact control spacing/type density, not separate card styles. CV keeps its spacious hero, section gaps and 16px body text. Circular avatars/language switches and radius16 overlays retain their distinct roles. CV social buttons, Highlights and Available-for labels must consume the same product component tokens; do not leave legacy radius16/pill surfaces in those components.

@@ -29,6 +29,8 @@ for key in ['frameMaxWidth','cardRadius','cardPaddingX','sectionPaddingY','cardG
  name=re.sub(r'(?<!^)(?=[A-Z])','-',key).lower()
  out.append('  --ds-workspace-'+name+': '+str(p['workspace'][key])+'px;')
 out.append('  --ds-workspace-header-surface: var(--ds-color-ground);')
+for key,name in [('cardRadius','card-radius'),('controlRadius','control-radius'),('badgeRadius','badge-radius')]:
+ out.append('  --ds-product-'+name+': '+str(p['sharedComponents'][key])+'px;')
 out.append('}')
 out += ['@media (max-width: 640px) {','  [data-ds-profile] { --ds-page-gutter: 16px; }','  [data-ds-profile="spacious"] { --ds-section-gap: 32px; --ds-panel-padding: 16px; --ds-panel-gap: 16px; }','  [data-ds-product="0xhieu-xyz"] { --ds-val-header-font-size: '+str(v['headerFontMobile'])+'px; --ds-val-header-line-height: '+str(v['headerLineMobile'])+'px; --ds-val-panel-gap: '+str(v['panelGapMobile'])+'px; --ds-cv-hero-top: '+str(cv['heroPaddingTopMobile'])+'px; --ds-cv-section-gap: '+str(cv['sectionGapMobile'])+'px; --ds-cv-portrait: '+str(cv['portraitMobile'])+'px; }','}']
 (root/'web.css').write_text('\n'.join(out)+'\n',encoding='utf-8')
