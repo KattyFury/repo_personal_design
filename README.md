@@ -129,3 +129,7 @@ Valuation and Work share the product workspace tokens: max frame1280px including
 ### Shared component identity across all three pages
 
 For 0xhieu.xyz, `sharedComponents` applies to CV as well as Valuation and Work: card/control/badge radius8, white surface, line border, no decorative card shadow. Spacious and compact control spacing/type density, not separate card styles. CV keeps its spacious hero, section gaps and 16px body text. Circular avatars/language switches and radius16 overlays retain their distinct roles. CV social buttons, Highlights and Available-for labels must consume the same product component tokens; do not leave legacy radius16/pill surfaces in those components.
+
+### Approved action elevation
+
+User requires drop shadow on clickable button surfaces across CV/Valuation/Work: existing black32%, y2px, blur8px token. Read-only cards/badges/content and disabled controls stay flat. Text navigation/inline links keep their text treatment. This supersedes the earlier overlay-only shadow restriction.
