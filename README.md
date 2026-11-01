@@ -1,218 +1,123 @@
-# nguyen0xhieu — Design System
+# nguyen0xhieu — Design System v3
 
-> **Cho AI agent:** đọc hết file này và [`tokens.json`](tokens.json) trước khi thiết kế. Chỉ dùng màu, chữ, khoảng cách, bo góc, shadow có trong `tokens.json`; không tự bịa giá trị mới.
->
-> - Hướng dẫn (file này): https://raw.githubusercontent.com/KattyFury/repo_personal_design/main/README.md
-> - Token (JSON): https://raw.githubusercontent.com/KattyFury/repo_personal_design/main/tokens.json
-> - Figma gốc: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu
+Nguồn chuẩn để thiết kế và code mọi sản phẩm của nguyen0xhieu. **Giữ bộ màu gốc**, dùng hai mật độ web theo mục đích và một tập component nhất quán. Cập nhật 2026-11-01.
 
-Bộ màu thương hiệu cá nhân của nguyen0xhieu, dùng cho mọi thiết kế: web, app, slide, ảnh mạng xã hội. Gốc của cả bộ là **0x Blue** (`blue`, #1E6DF7). Đây là màu xanh nằm đúng điểm cân bằng giữa trắng và đen, nên đặt trên nền trắng hay nền đen đều đọc được.
+## Dùng bộ này
 
-## Hai chế độ thiết kế web — chốt 2026-11-01
+1. Đọc tài liệu và `tokens.json` trước khi thiết kế.
+2. Chọn **pattern**: editorial/landing, bảng dữ liệu hay danh sách công việc.
+3. Chọn profile cho từng trang/vùng: `spacious` hoặc `compact`.
+4. Dùng `web.css` xuất từ token; không tự tạo màu hay giảm spacing ngẫu nhiên.
+5. Nếu có ngoại lệ đã duyệt, ghi vào `products` và tài liệu sản phẩm. Ngoại lệ sản phẩm ưu tiên trong đúng phạm vi đó.
 
-**Chọn chế độ trước khi thiết kế, theo mục đích của trang.** Cả hai dùng nguyên bộ màu Light/Dark, font, icon, ngữ nghĩa trạng thái và token shadow hiện có. Không đổi màu để biểu thị chế độ. Thông số máy đọc nằm ở `tokens.json → webProfiles`.
-
-| Chế độ | Dùng cho | Mục tiêu |
-|---|---|---|
-| `spacious` — thoáng | CV, portfolio, landing page, trang giới thiệu | Đọc câu chuyện, phân cấp nội dung, CTA rõ |
-| `compact` — tối ưu diện tích | Valuation, dashboard, bảng số liệu, Work/Airdrop, công việc, Admin | Quét, so sánh và thao tác trên nhiều thông tin hữu ích |
-
-Một website có thể dùng cả hai: **CV → spacious; Valuation và Work/Airdrop → compact**. Một trang có hero giới thiệu và bảng dữ liệu có thể chọn theo từng vùng; spacing của hero không lan vào bảng. Chế độ không thay đổi chỉ vì chuyển desktop sang mobile.
-
-### Thông số bắt buộc theo chế độ
-
-Tất cả kích thước dưới đây là CSS px; chiều cao dòng/ô là **tối thiểu**, được tăng theo nội dung.
-
-| Thành phần | `spacious` | `compact` |
-|---|---|---|
-| Nhịp spacing | Bội số 8 | Bội số 4; cho phép 4 và 12 |
-| Khung desktop | Tối đa 1200, ở 1440 lề 120, rãnh 24 | Co giãn theo khung, đệm ngang 24; không bắt buộc giới hạn 1200 |
-| Lề mobile | 16 | 16 |
-| Đệm section dọc desktop / mobile | 96 / 48 | Đệm trang 16 / 12; nhóm cách 16, section cách 24 |
-| Khoảng giữa các khối desktop / mobile | 64 / 32 | 16 / 12 giữa panel |
-| Đệm thẻ desktop / mobile | 32 (thẻ nhỏ 24) / 16 | 12; panel nhỏ 8 |
-| Tiêu đề trang desktop / mobile | Chọn `web-h1`/`web-h2`, mobile tương ứng; CV có thể dùng cấp nhỏ hơn theo nội dung | `web-h3` 24/32 / `web-h4` 20/28 |
-| Tiêu đề panel | `web-h4` 20/28 | `web-nav-button` 16/24; nhãn nhóm nhỏ `web-label` 14/20 |
-| Chữ nội dung | `web-body` 16/24 | Văn bản 16/24; dữ liệu 14/20; không giảm nội dung dưới 14 |
-| Header panel / bảng | Theo nội dung và nhịp 8 | Tối thiểu 40; tăng nếu tiêu đề cần xuống dòng |
-| Dòng danh sách / bảng một dòng | Tối thiểu 56 | Bảng mặc định 40; desktop dày dữ liệu có thể 32; nhãn–giá trị 32 |
-| Dòng hai dòng / task | Theo nội dung, tối thiểu 56 | Hai dòng tối thiểu 48; task tối thiểu 40, tự cao theo chữ |
-| Nút chính / toolbar | 48 / 40; CTA hero 56 | 40 / 32; vùng chạm độc lập xem quy tắc dưới |
-| Ô nhập | 48 | 40; input chữ trên mobile vẫn 16px |
-| Bo góc | `radius-md` 16 | Panel 16; nút/ô nhỏ `radius-sm` 8; dòng dữ liệu không bo mặc định |
-| Dòng trong panel | Có thể dùng thẻ/nền riêng | Mặc định khe 0, kẻ mảnh bằng `line`; nhãn và số thẳng cột |
-| Chiều cao panel | Theo nội dung | Theo nội dung; không ép bằng nhau và không thêm dòng rỗng |
-
-### Quy tắc sử dụng compact
-
-- **Giảm khoảng trống trước khi giảm chữ.** Số liệu dùng `tabular-nums`, canh phải; nhãn canh trái, header theo cột. Chữ phải hiện đủ, task được xuống dòng; không ép chiều cao cố định làm mất nội dung.
-- Khối chỉ để đọc không phải có chiều cao của nút. Nút toolbar có hình nhìn thấy cao 32 vẫn phải có vùng chạm **ít nhất 44×44**, không chồng lên mục bên cạnh; nếu không đủ chỗ thì tăng kích thước hoặc nhóm bớt hành động.
-- Không áp quy tắc nút native app rộng 296px vào dashboard web. Hành động compact rộng theo nội dung hoặc panel.
-- Bỏ shadow từng dòng, bỏ thẻ bo góc cho từng con số. Dùng `line`, canh hàng và nhóm nội dung để phân tách; chỉ dùng shadow hiện có ở vùng thực sự nổi.
-- Mobile có thể 2 panel/hàng khi đọc đủ nhãn và số. Panel có nhãn dài hoặc form được chiếm cả hàng. Kiểm tra ít nhất 320/360/390px, VI/EN nếu có, trạng thái rỗng và dữ liệu dài.
-- Toolbar được yêu cầu một hàng thì phải giữ một hàng: thu đệm/nút trước, tiêu đề co theo thang 20 → 18 → 16 → 14. Nếu vẫn thiếu, dùng nhãn ngắn đã duyệt hoặc menu hành động; không tự thu chữ số liệu dưới 14, cắt chữ hay làm mất nút.
-- Danh sách dài có thể cuộn trong vùng giới hạn có chủ đích. Không cố định chiều cao mọi box để đẹp hàng, không `padRows()` đệm dòng trống. Kiểm tra lượng dữ liệu hữu ích xuất hiện và tránh nhiều vùng cuộn lồng nhau.
-- Không tự tạo điểm số, biểu đồ, badge hay box chỉ để lấp chỗ; mỗi phần phải giúp người xem đọc, so sánh hoặc thực hiện công việc.
-
-### Phạm vi và thứ tự ưu tiên
-
-- Quy tắc màu/chữ/ngữ nghĩa dùng chung; hình học web chọn từ `webProfiles.spacious` hoặc `webProfiles.compact`.
-- Các bảng “Website” về lề/section/button/box ở phần dưới là **mặc định spacious**, không áp cho compact. App native và slide giữ nguyên quy tắc riêng.
-- Nếu sản phẩm có ngoại lệ được duyệt, ghi rõ phạm vi trong tài liệu sản phẩm; không biến ngoại lệ đó thành mặc định toàn bộ design system.
-- Token/profile trong repo là nguồn cho hai chế độ mới. Figma hiện có chưa được đồng bộ các token 4/12, radius 8 và profile compact; không tuyên bố Figma đã có những cập nhật này.
-
-## Màu xanh đặc trưng
-
-- `blue` là màu nhận diện. Màu này giữ **nguyên một giá trị ở cả giao diện sáng lẫn tối**, đạt 4.58:1 trên trắng và 4.59:1 trên đen (chuẩn chữ thường là 4.5:1).
-- **Nút chính:** nền `blue`, chữ `on-blue` (trắng).
-- **Nút phụ:** nền trắng (`ground`), chữ `blue`.
-- **Chữ nhấn, link:** dùng `blue` trên `ground`.
-- Trên nền xám/nhạt (`mist`, `blue-soft`), `blue` chỉ dùng cho chữ to (≥24px, hoặc ≥19px đậm) và icon. Chữ nhỏ màu xanh trên các nền này dùng `blue-strong`.
-- Màu đen thương hiệu là **đen thuần #000000** (`ink`). Lệch sang đen-xanh dù chỉ một chút là `blue` tụt dưới 4.5:1 so với đen.
-
-## Gradient
-
-- Gradient thương hiệu: `linear-gradient(to top right, var(--gradient-end), var(--gradient-start))`. Đầu đậm `gradient-end` (#0F3DB2) ở góc dưới-trái, đầu sáng `gradient-start` (= `blue`) ở góc trên-phải.
-- Chữ trắng `on-blue` đọc được trên toàn dải: 4.58:1 ở đầu sáng, 9.0:1 ở đầu đậm.
-- Dùng cho nút chính nổi bật, banner, ảnh bìa, khối số dư. Mỗi màn hình chỉ một vùng gradient. Chữ, icon nhỏ và đường kẻ không dùng gradient.
-
-## Chữ và nền
-
-| Vai trò | Token | Dùng cho |
-|---|---|---|
-| Chữ đen | `ink` | Tiêu đề, nội dung chính (dark: trắng) |
-| Chữ xám | `grey` | Mô tả, nhãn, giá trị phụ |
-| Chữ muted | `muted` | Placeholder, chữ bị tắt, giờ/ngày. Không dùng cho chữ người đọc cần làm theo |
-| Trắng | `ground` | Nền trang (dark: đen thuần) |
-| Nền phụ | `mist` | Thẻ, ô nhập, khối gom nhóm. Nhạt hơn `muted`, hơi ngả xanh để hợp với `blue` |
-| Đường kẻ | `line` | Viền mảnh 0.5–1px, viền ô nhập |
-
-- Chỉ có 3 cấp chữ: `ink`, `grey`, `muted`. Không thêm cấp xám thứ tư.
-- Thứ bị tắt (disabled) thì đổi sang màu nhạt hơn hoặc ẩn đi. Nút bị tắt: nền `line`, chữ `muted`, không shadow. **Không giảm opacity.**
-
-## Bộ màu đi kèm
-
-Mỗi màu có 3 bậc:
-- Màu gốc (`green`…): cho icon, chấm, biểu đồ, khối lớn.
-- `-text`: cho chữ trên nền trắng và trên nền nhạt của chính nó.
-- `-soft`: cho nền nhạt của ghi chú, badge, dòng.
-
-| Màu | Ý nghĩa |
+| File | Vai trò |
 |---|---|
-| `green` | Thành công, nhận tiền, tăng |
-| `red` | Lỗi, gửi tiền đi, xoá, giảm |
-| `purple` | Điểm nhấn, tính năng mới, chuỗi biểu đồ thứ 2 |
-| `yellow` | Cảnh báo, đang chờ. Chữ trên nền `yellow` luôn là `ink` đen |
-| `orange` | Cần chú ý nhưng không phải lỗi: hạn mức, phí, sắp hết hạn |
-| `cyan` | Thông tin, link ra ngoài, chuỗi biểu đồ thứ 3 |
+| `tokens.json` | Màu Light/Dark, typography, spacing, component, hai profile và ngoại lệ sản phẩm |
+| `web.css` | CSS variables được xuất tự động từ token, gồm màu/type/profile/product |
+| `export_web.py` | Chạy `python export_web.py` để xuất lại CSS; không cần dependency |
+| `README.md` | Quyết định thiết kế, cách chọn pattern và tiêu chí kiểm tra |
 
-- Trạng thái luôn đi kèm chữ hoặc icon ("Received", "Failed"). Không phân biệt xanh lá với đỏ chỉ bằng màu.
-- Không dùng quá 2 màu đi kèm trên một màn hình, ngoài `blue`.
+Trong HTML: `<body data-ds-product="0xhieu-xyz" data-ds-profile="compact">`. Theme dùng `data-ds-theme="dark"` khi sản phẩm có hỗ trợ. Profile đổi theo trang, không đổi tùy tiện chỉ vì viewport nhỏ.
 
-## Gradient hay solid
+## Nền tảng và nguồn tham khảo
 
-- **Solid là mặc định** cho mọi thứ:
-  - Nút chính: nền `blue`, chữ `on-blue`. Nút phụ: nền `ground`, chữ `blue`.
-  - Chữ: `ink`, `grey`, `muted`. Thẻ và ô nhập: `mist`.
-  - Trạng thái và biểu đồ dùng màu đi kèm, dạng solid.
-- **Gradient chỉ dùng tối đa 1 vùng trên mỗi màn hình hoặc mỗi slide**, ở một trong các chỗ sau:
-  - nền slide bìa và slide chương;
-  - dải hero của web;
-  - thẻ số dư hoặc thẻ tóm tắt;
-  - nút CTA chính duy nhất.
-- Không dùng gradient cho chữ, icon, đường kẻ, chip, nút nhỏ, ô nhập hay biểu đồ. Không đặt 2 vùng gradient cạnh nhau.
+Đây là **bộ quy tắc tổng hợp cho sản phẩm của mình**, không giả vờ một thư viện quy định toàn bộ các con số:
 
-## Chữ
+- [Radix spacing](https://www.radix-ui.com/themes/docs/theme/spacing): scale 4/8/12/16/24…, density thay đổi có hệ thống.
+- [Radix Table — mã nguồn](https://github.com/radix-ui/themes/blob/main/packages/radix-ui-themes/src/components/table.css): compact cell padding 8px, canh nội dung, dùng kẻ phân cách và một bề mặt chung.
+- [shadcn Tasks — mã nguồn](https://github.com/shadcn-ui/ui/blob/main/apps/v4/app/%28app%29/examples/tasks/components/data-table.tsx): workspace công việc tổ chức theo dòng/bảng với thao tác chung; không biến mỗi thông tin thành một card.
+- [Carbon data table](https://www.carbondesignsystem.com/building-blocks/core/components/data-table/guidelines): nhiều mức mật độ, 32px cho dense desktop và 40px mặc định. Header Valuation 56px là yêu cầu riêng của sản phẩm, **không phải** thông số suy ra từ Carbon.
 
-- **Thiết kế (Figma, slide): Inter** (`design`).
-- **Code app và web: font hệ thống của Apple** (`app`: -apple-system, SF Pro). Trên máy không có SF Pro, font tự lùi về font hệ thống.
-- Cỡ chữ là số chẵn từ 14 tới 96. Khoảng cách dòng theo bước 4px. Letter-spacing theo bảng "dynamic metrics" của Inter: chữ càng to càng khít, từ −0.6% ở cỡ 14 tới −2.2% ở cỡ 96.
-- Tên style ghi luôn chỗ dùng.
-- **App mobile: chỉ 7 cỡ 14 · 16 · 18 · 22 · 28 · 34 · 48** (chốt 2026-10-20, rút từ ezwallet). Bộ này dựa trên cỡ chữ chuẩn của iPhone (Body 17, Title 2 22, Title 1 28, Large Title 34), làm tròn lên số chẵn. Chữ nội dung to hơn app thường vì app cũng phục vụ người lớn tuổi:
-  - `app-caption` / `app-label` 14/20: giờ, gợi ý, chip, badge;
-  - `app-note` 16/24: ghi chú, toast, gợi ý (hint) và dòng thông báo, ô nhập địa chỉ;
-  - `app-secondary` 18/24: dòng phụ "Nhãn: giá trị", nhãn thanh tab;
-  - `app-button-small` 18/24 đậm: nút có icon (icon 24 trên, chữ dưới) và nút nhỏ dạng viên (50%, Max, Open, chọn tiền tệ…);
-  - `app-body` / `app-button` / `app-title-card` 22/28: nội dung, nút chữ thường, tiêu đề thẻ và popup;
-  - `app-title-screen` 28/36: tiêu đề màn hình, phím bàn phím số;
-  - `app-large-title` 34/40: tiêu đề màn đầu, số dư;
-  - `app-number` 48/56: số tiền.
-- Slide:
-  - `slide-cover`: 96/104 Bold, cho bìa.
-  - `slide-title`: 56/64 Bold, cho tiêu đề slide nội dung.
-  - `slide-body`: 32/44, cho nội dung.
-  - `slide-footnote`: 24/32, cho nguồn và số trang.
-- Web 1440 dùng `web-*`. Web trên điện thoại (393) đổi tiêu đề sang `web-mobile-*`.
+## Hai profile web
 
-## Shadow
-
-- Chỉ có một shadow là `shadow-y2`: X 0, Y 2, Blur 8, Spread 0, màu đen #000000 độ đậm **32%** ở giao diện sáng và **48%** ở giao diện tối. Ngày 2026-10-19 đã nâng từ 16% lên 32% cho rõ hơn.
-- Dùng cho thẻ nổi, nút, popup và sheet. Các khối phẳng đặt trên nền `mist` thì không cần shadow.
-
-## Lề, lưới và khoảng cách
-
-- Với web spacious, app native và slide, khoảng cách là bội số của 8 (web compact dùng nhịp 4 theo bảng hai chế độ phía trên):
-  - `space-8`: icon cách chữ;
-  - `space-16`: lề mobile, padding thẻ;
-  - `space-24`: khoảng giữa các thẻ, rãnh cột web;
-  - `space-32`: khoảng giữa các nhóm trong màn app;
-  - `space-48`, `space-64`, `space-96`, `space-128`: các khoảng lớn của web và slide (xem bảng dưới).
-- Spacious và app dùng `radius-md` 16px cho thẻ, ô và nút. Compact dùng panel 16, ô/nút nhỏ `radius-sm` 8, dòng dữ liệu không bo. Pill và hình tròn dùng `radius-pill`.
-
-| Khung | Chiều rộng | Chiều cao / nhịp dọc |
+| | `spacious` — trình bày | `compact` — công việc/dữ liệu |
 |---|---|---|
-| **Mobile app 393×852** | Lề 16, 4 cột, rãnh 16 | **Không có lưới hàng**, vì màn app cuộn dọc. Nhịp dọc theo lưới nền 8. Chừa vùng an toàn: trên 59 (thanh trạng thái + Dynamic Island), dưới 34 (thanh home). Thẻ cách nhau 16–24, nhóm cách nhau 32 |
-| **Website 1440** | Lề 120, 12 cột, rãnh 24, nội dung rộng 1200 | Padding mỗi section 96, các khối cách nhau 64. Đoạn văn rộng tối đa 680 |
-| **Website mobile 393** | Lề 16, 4 cột, rãnh 16 | Padding mỗi section 48, các khối cách nhau 32 |
-| **Slide 1920×1080** | Lề 128, 6 cột, rãnh 64 (mỗi cột 224) | Lề 128, 4 hàng, rãnh 64. Kicker cách tiêu đề 24, tiêu đề cách nội dung 48 |
+| Dùng cho | CV, portfolio, landing, trang giới thiệu | Valuation, Work/Airdrop, dashboard, Admin, bảng dữ liệu |
+| Mục tiêu | Đọc và hiểu câu chuyện, CTA rõ | Quét, so sánh và thao tác nhanh |
+| Nhịp chính | 8px | 4px |
+| Lề mobile | 16px | 16px |
+| Lề desktop | Theo khung 1200px, lề tối thiểu 48px | 24px; không bắt buộc khung 1200 |
+| Nhóm nội dung | 64px desktop / 32px mobile | 16px |
+| Panel | Đệm 16–32px, khoảng giữa 16–24px | Cell/đệm chính 8px, panel phụ 8–12px |
+| Nội dung | Body 16/24, lead 18/28 | Body 16/24; số/task/metadata 14/20 |
+| Header panel | 20/28 khi cần nhấn | 16/24, mobile có thể 14/20 |
+| Dòng | Theo nội dung, list min 56 | Mặc định 40; dense desktop 32; touch 44 |
+| Chiều cao | Theo nội dung | Theo nội dung, trừ panel cố định đã được yêu cầu |
+| Bề mặt | Khối nội dung rõ; whitespace có chủ đích | Một bề mặt theo nhóm, ít lớp nền/viền; kẻ hàng thay card lồng card |
 
-Căn cứ:
-- Lề 16 và lưới 8pt theo Apple HIG và Material (màn hình nhỏ: 4 cột, lề 16).
-- Lưới slide theo một brand guide 1920×1080 đã công bố (lề 128, rãnh 64, 4–6 cột).
-- Viền focus: 2px `focus` (= `blue`), cách 2px.
+Không lấy spacing section của landing áp vào workspace. Không lấy chữ native-app 22px áp cho bảng web. Một trang có thể có hero spacious và vùng dữ liệu compact, nhưng ranh giới phải rõ.
 
-## Button và box
+## Bộ màu — giữ nguyên
 
-Căn cứ: Apple HIG yêu cầu vùng bấm tối thiểu 44×44 pt. Slide 1920 có mật độ khoảng gấp đôi màn hình thường, nên mọi kích thước trên slide nhân đôi, kể cả bo góc (`radius-32`).
+- Global brand: **0x Blue `#1E6DF7`** ở cả Light/Dark. Primary dùng `blue` + `on-blue`; small text trên nền tint dùng `blue-strong`.
+- Văn bản chỉ ba cấp: `ink` (chính), `grey` (phụ), `muted` (metadata/disabled). Không dùng muted cho việc người dùng cần đọc để hành động.
+- Nền `ground`, nhóm `mist`, kẻ `line`. Không tự pha xám thứ tư.
+- Mỗi màu trạng thái có base / `-text` / `-soft`: green thành công, red lỗi/nguy hiểm, yellow chờ/cảnh báo, orange chú ý, cyan thông tin, purple chuỗi phụ/tính năng mới. Màu trạng thái phải kèm chữ hoặc ký hiệu rõ nghĩa.
+- Chữ trên yellow luôn đen. Nền solid là mặc định; tối đa một gradient lớn/màn, không dùng gradient cho chữ, icon nhỏ hay bảng dữ liệu.
+- Disabled: nền line, chữ muted, không shadow, không giảm opacity.
+- Sản phẩm 0xhieu.xyz giữ primary đen và vàng mắt mèo `#FFA111`; đó là override đã duyệt trong `products.0xhieu-xyz`, không đổi palette global.
 
-| | Mobile app 393 | Website 1440 | Slide 1920 |
-|---|---|---|---|
-| Nút | Cao **48**, đệm 24, chữ `app-button` | Cao **48**, đệm 24. CTA hero cao **56**, đệm 32 | Cao **96**, đệm 48, chữ `slide-button` |
-| Nút có icon | Icon 24 trên, chữ dưới, chữ `app-button-small` 18 đậm. Khoảng trống **mắt thấy** giữa icon và chữ là 8 (đo từ nét icon tới đỉnh chữ hoa; trong code để gap 0, vì icon có lề trong và dòng chữ 18/24 có đệm phía trên). Cùng một hàng thì mọi nút cùng kích thước, nút chính chỉ khác màu (nền `blue`) | như mobile | không dùng |
-| Nút nhỏ | Dạng viên cao 40, đệm 16, chữ `app-button-small` 18 đậm. Vùng bấm vẫn ≥44 | Cao 40, đệm 16, chữ `web-label` | không dùng |
-| Nút icon | 48×48, icon 24 | 40×40, icon 20 | 96×96, icon 48 |
-| Ô nhập | Cao 48, đệm 16, nền `mist`, viền `line` 1px, khi chọn viền 2px `blue` | như mobile | không dùng |
-| Box / thẻ | Đệm 16, các phần trong cách nhau 8, thẻ cách nhau 16–24 | Đệm 32 (thẻ nhỏ 24), rộng 4 cột = 384, thẻ cách nhau 24 | Đệm 48, tiêu đề `slide-box-title`, rộng 3 cột = 800, box cách nhau 64 |
-| Dòng danh sách | Cao tối thiểu 56, đệm 16 | Cao tối thiểu 56, đệm 24 | không dùng |
-| Bo góc | `radius-md` 16 | `radius-md` 16 | `radius-32` |
+## Typography
 
-Màu, áp dụng chung cho cả 3 loại khung:
-- Nút chính: nền `blue`, chữ `on-blue`.
-- Nút phụ: nền `ground`, chữ `blue`.
-- Nút chính và nút phụ đều có `shadow-y2`.
-- Nút bị tắt: nền `line` (#DCE3EE), chữ `muted`, không shadow, không giảm opacity. Dùng `line` chứ không dùng `mist`, vì nút tắt đặt trên bảng nền `mist` sẽ biến mất (phát hiện khi redesign ezwallet 2026-10-19).
-- Box phẳng: nền `mist`, không shadow. Box nổi: nền `ground` + `shadow-y2`.
-- Trên mobile, **nút đứng một mình** (Done, Reload…) rộng cố định **296** (3/4 màn 393, làm tròn bội số 8), căn giữa, không bao giờ rộng full (chốt 2026-10-20, rút từ ezwallet). **Ngoại lệ:** nút hành động mang chữ trạng thái thay đổi (Swap, gửi/rút, vay: gợi ý, "At most …", lỗi) thì rộng full 361, để chữ dài không bị cắt. Hai nút trở lên trong một hàng thì chia đều chiều ngang, cách nhau 16.
+Inter cho thiết kế/Figma/slide; system Apple/SF Pro với fallback system cho code web/app. Giá trị đầy đủ và letter-spacing nằm trong `type.groups`.
 
-## Icon
+| Vai trò web | Style | Thông số |
+|---|---|---|
+| Metadata/data | web-caption | 14/20, 400 |
+| Nhãn | web-label | 14/20, 600 |
+| Nội dung | web-body | 16/24, 400 |
+| Panel/toolbar | web-nav-button | 16/24, 600 |
+| Lead | web-lead | 18/28, 400 |
+| Tiêu đề nhỏ | web-h4 | 20/28, 600 |
+| Tiêu đề màn/mục | web-h3 | 24/32, 600 |
+| Display | web-h2/h1/hero | 40/48, 56/64, 72/80, 700; mobile theo style riêng |
 
-- Bộ **Lucide 1.59.0**: 2.159 icon, khung 24×24, nét 2px, đầu nét tròn, giấy phép ISC (dùng cá nhân và thương mại tự do, giữ lại thông báo bản quyền).
-- Chỉ dùng các cỡ 16, 20, 24 hoặc 32. Màu icon lấy từ màu chữ hoặc `blue`. Không dùng emoji thay icon.
+Chữ dữ liệu không dưới 14. Số dùng `tabular-nums`; nhãn canh trái, số theo cột. Task/tên/tag được xuống dòng, không mất chữ. Không đổi weight làm nhích layout khi hover. Chữ body có thể giới hạn 680px; bảng không chịu giới hạn này.
 
-## File Figma
+## Component và bề mặt
 
-Bộ gốc đã có trong file Figma `hieu`; hai profile web và token compact bổ sung ngày 2026-11-01 chưa được đồng bộ sang Figma: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Tên mỗi style đều theo mẫu `Nhóm/Tên — công dụng · thông số`, nên chỉ cần đọc tên là biết dùng ở đâu.
+- Radius: panel 16, control nhỏ 8, data row 0, pill/circle 9999. Không bọc từng nhãn/số bằng thẻ bo góc.
+- Flat/border line là mặc định. `shadow-y2` chỉ cho overlay, menu nổi hoặc bề mặt nổi có lý do; không phủ bóng mọi nút/card.
+- Nút thường 40px compact, toolbar nhìn thấy 32; spacious 48. Trên thiết bị cảm ứng đảm bảo mục bấm chung tối thiểu 44, không chồng nhau. Ngoại lệ toolbar sản phẩm phải ghi rõ.
+- Ô nhập compact 40, touch 44; chữ input mobile 16 để tránh tự zoom. Form có label, focus 2px và error text.
+- Focus nhìn rõ, offset 2px. Hover dùng màu/chỉ báo ổn định; không nâng card hay thay độ rộng chữ. Không bổ sung chuyển động trang trí.
+- Popup theo nội dung, có max-height trong viewport và cuộn; khóa nền khi mở. Escape/backdrop theo hành vi đã định, form nhập dài không tự mất khi bấm nhầm.
+- Icon dùng Lucide 1.59.0, stroke 2, size 16/20/24/32. Không dùng emoji làm icon thao tác.
 
-| Trang | Nội dung |
-|---|---|
-| Cover | Bìa, mục lục |
-| Colors | 59 style màu: `Light/Brand/…`, `Light/Text/…`, `Light/Surface/…`, `Light/Accent/…`; bộ `Dark/…` tương ứng; `Gradient/Brand Blue` |
-| Typography | 30 text style: `App/…`, `Web/…`, `Web Mobile/…`, `Slide/…`, ví dụ `Slide/Cover & Big Number — cover title, one big stat · 96/104 Bold` |
-| Layout, Shadow & Gradient | Spacing, lề và lưới, `Shadow/Y2 Light` (32%) / `Shadow/Y2 Dark` (48%), quy định gradient hay solid |
-| Buttons & Boxes | Component `App/Button`, `App/Icon Button`, `App/Input`, `App/Card`, `App/List Row`, bộ `Web/…` tương ứng, `Slide/Button`, `Slide/Icon Button`, `Slide/Box` |
-| Templates | Khung mẫu đã gắn lưới: Mobile App 393×852, Website 1440, Website Mobile 393, Slide bìa và Slide nội dung 1920×1080 |
-| Icons | 2.159 component `Icon/<tên>` (Lucide) |
+## Pattern: bảng dữ liệu
 
-Ngoài ra file có:
-- 5 grid style `Grid/…`;
-- 11 biến trong bộ `Spacing & Radius`: `space/8 … space/128`, `radius/16`, `radius/32`, `radius/pill`. Padding và bo góc của các component đã nối sẵn vào các biến này.
+Một bề mặt bảng, header và thân thẳng cột. Độ rộng theo nội dung, dành chỗ cho trường dài; không chia đều mọi cột bằng phần trăm. Header và body có cùng quy tắc đo, cùng hướng cuộn. Bảng cuộn nội bộ khi tổng minimum width vượt viewport; không tràn toàn trang hoặc đè cột.
+
+Không ngắt một giá trị ghép cần đọc cùng nhau chỉ để giữ cột hẹp. Không thu nhỏ font để che lỗi width. Chỉ vùng danh sách dài mới cần giới hạn cao. Không thêm dòng rỗng để lấp box. Các header cùng vai trò dùng token chung, không sửa độc lập.
+
+## Pattern: workspace công việc
+
+Mỗi nhóm có một bề mặt chung; mỗi dự án là một hàng. Desktop tách vùng thông tin dự án và vùng việc. **Phase là cột nhãn cạnh task**, không phải một tiêu đề lớn chiếm thêm hàng trên từng task. Mobile chuyển thông tin dự án lên trên, nhưng phase và việc vẫn cạnh nhau.
+
+Giữ toàn bộ task/link, không tự thêm điểm số/checklist/tính năng AI. Không dùng dải màu Daily lặp xen kẽ; màu chỉ cho nhóm/trạng thái có nghĩa. Rank có thể là metadata; không tạo nhiều lớp nhãn, separator và badge cho cùng một ý.
+
+## Pattern: CV/landing
+
+Chọn một trục căn lề và phân cấp nội dung. CV là editorial portfolio: avatar, tên và thông điệp nhận diện thành một hero rõ; nội dung kinh nghiệm dễ đọc, hình ảnh có caption. CTA vừa đủ và không cạnh tranh với tiêu đề. Landing marketing có thể dùng display lớn hơn; không bắt CV phải có hero 72px.
+
+## Quy tắc riêng của 0xhieu.xyz
+
+- `/` spacious; `/valuation` và `/work` compact. `/airdrop` chuyển 301 sang `/work` và có fallback client.
+- Brand đen/vàng cũ. Navbar căn theo khung của profile đang mở.
+- Valuation: 8 token trên cả desktop/mobile; dòng 40, header bảng/popup/box **56**; chữ header desktop16/24, mobile14/20, 600. Ba box **328px cố định**, nội dung dài cuộn; mobile tất cả dùng 2 cột bằng nhau, không tự cho một box span cả hàng.
+- Nhãn/giá trị trong box trái/phải, min-height 56, cho phép tăng để hiện đủ chữ. Ticker dưới $300M đậm đen; từ $300M đậm cam, không chấm. ATH `đầu → cuối (×N)` một dòng, tỷ số tính từ số gốc và cam đậm.
+- Work: project column240 desktop; phase104; padding8; task40 desktop/44 touch; groupgap16. Những kích thước này phục vụ pattern, không dùng làm spacing chung cho mọi thành phần.
+- CV: khung1200; hero trên96/48, khối cách64/32; portrait112/72. Nội dung CV vẫn tiếng Anh, tagline giữ nguyên văn.
+- Toolbar mobile một hàng là yêu cầu riêng: title20/18/16/14, control nhìn thấy32. Không biến ngoại lệ này thành chuẩn touch cho mọi nơi.
+
+## Native app và slide
+
+Giữ nguyên token chuyên biệt hiện có: app scale14/16/18/22/28/34/48, body22/28, input/button48; safe-area theo thiết bị. Slide1920×1080 giữ lề128, rãnh64 và type slide riêng. Chúng không bị thay bằng geometry web compact. Các bảng grid/type trong `tokens.json` là nguồn chính xác.
+
+## Export, kiểm tra và thay đổi
+
+Chạy `python export_web.py`; commit token và CSS xuất cùng nhau. Website phải đồng bộ bản CSS và ghi phiên bản, không đọc remote CSS runtime. Dùng nguồn JSON để kiểm tra màu không bị đổi ngoài scope.
+
+QA tối thiểu: desktop1440/1024/768 và mobile640/390/360/320; các ngôn ngữ; dữ liệu rỗng/dài; không cắt chữ/tràn cột; đủ link/action; hover/focus; vùng chạm; popup; navbar và back/forward. Xem ảnh thật, không chỉ báo lint. Test component phải kiểm tra vai trò/layout, không chỉ khớp một con số rời rạc.
+
+Figma gốc: https://www.figma.com/design/IPyKVg7ylGw1mjMRyYVrL7/hieu. Token v3 và pattern mới **chưa được đồng bộ sang Figma**; không tuyên bố file Figma đã chứa thay đổi này.
