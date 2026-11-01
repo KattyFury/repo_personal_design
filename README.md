@@ -133,3 +133,11 @@ For 0xhieu.xyz, `sharedComponents` applies to CV as well as Valuation and Work: 
 ### Approved action elevation
 
 User requires drop shadow on clickable button surfaces across CV/Valuation/Work: existing black32%, y2px, blur8px token. Read-only cards/badges/content and disabled controls stay flat. Text navigation/inline links keep their text treatment. This supersedes the earlier overlay-only shadow restriction.
+
+### Approved orange headers
+
+User overrides neutral header surfaces: Work card headers, Valuation panel/table headers and matching table popup headers use solid product accent #FFA111 with ink/black text. Bodies remain white; DAILY remains soft yellow. Source: product workspace/headerSurface=accent. This supersedes earlier white-header guidance; dimensions stay unchanged.
+
+### Approved accent text
+
+0xhieu.xyz accent text uses the same product orange #FFA111, weight600. Do not substitute earth-orange #B84A0C for emphasis. Orange header backgrounds use black text. Global palette tokens for other products remain unchanged.
