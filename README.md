@@ -149,3 +149,7 @@ Supersedes previous orange rules: black normal text, grey secondary text, blue i
 ## Current product decision: black/orange + stronger DAILY + single language switch
 
 Supersedes blue product theme: regular orange #FFA111 for button/header fills, black text on those fills, dark orange #B84A0C for important text, normal text black, secondary grey, card bodies grey. DAILY uses yellow-soft with a4px orange left border and dark-orange bold task text. VI/EN is one native accessible switch with a single translating thumb and two labels, not two circular buttons. Dimensions/data/formulas remain unchanged.
+
+## 2026-11-02: softer headers and continuous rank slider
+
+User requires pale orange `orange-soft` box/table headers with black text. Keep saturated orange for smaller buttons/selection highlights rather than large header fills. Work rank is one continuous bar with one sliding orange selected region, native range keyboard/drag support and scroll-spy synchronization; five independent circular buttons are prohibited.

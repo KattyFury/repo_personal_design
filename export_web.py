@@ -28,7 +28,7 @@ for key in ['frameMaxWidth','cardRadius','cardPaddingX','sectionPaddingY','cardG
  import re
  name=re.sub(r'(?<!^)(?=[A-Z])','-',key).lower()
  out.append('  --ds-workspace-'+name+': '+str(p['workspace'][key])+'px;')
-out.append('  --ds-workspace-header-surface: var(--ds-accent);')
+out.append('  --ds-workspace-header-surface: var(--ds-color-orange-soft);')
 out.append('  --ds-workspace-header-foreground: var(--ds-color-ink);')
 out.append('  --ds-on-primary: var(--ds-color-ink);')
 out.append('  --ds-product-card-surface: var(--ds-color-mist);')
