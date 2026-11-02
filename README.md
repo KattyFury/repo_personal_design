@@ -153,3 +153,7 @@ Supersedes blue product theme: regular orange #FFA111 for button/header fills, b
 ## 2026-11-02: softer headers and continuous rank slider
 
 User requires pale orange `orange-soft` box/table headers with black text. Keep saturated orange for smaller buttons/selection highlights rather than large header fills. Work rank is one continuous bar with one sliding orange selected region, native range keyboard/drag support and scroll-spy synchronization; five independent circular buttons are prohibited.
+
+## 2026-11-02: header matches DAILY
+
+Supersedes the pale orange header rule: product box/table headers use the exact DAILY background `yellow-soft` #FEF5D9, black text.
