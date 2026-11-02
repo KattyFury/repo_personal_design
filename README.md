@@ -157,3 +157,7 @@ User requires pale orange `orange-soft` box/table headers with black text. Keep 
 ## 2026-11-02: header matches DAILY
 
 Supersedes the pale orange header rule: product box/table headers use the exact DAILY background `yellow-soft` #FEF5D9, black text.
+
+## 2026-11-02: shared horizontal frame
+
+CV, Work, Valuation and navigation/footer share max1280 border-box, horizontal inset24 desktop/16 mobile. CV spacious density does not change the common horizontal frame.

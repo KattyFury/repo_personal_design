@@ -24,7 +24,7 @@ for name in ['spacious','compact']:
 p=t['products']['0xhieu-xyz'];v=p['valuation'];w=p['work'];cv=p['cv']
 out += ['[data-ds-product="0xhieu-xyz"] {','  --ds-primary: '+p['palette']['accent']+';','  --ds-accent: '+p['palette']['accent']+';','  --ds-accent-text: '+p['palette']['accentText']+';','  --ds-accent-soft: var(--ds-color-yellow-soft);']
 for k,value in {'val-header-height':v['headerHeight'],'val-header-font-size':v['headerFontDesktop'],'val-header-line-height':v['headerLineDesktop'],'val-panel-height':v['panelHeight'],'val-row-height':v['rowHeight'],'val-metric-row-height':v['metricRowMinHeight'],'val-panel-gap':v['panelGapDesktop'],'work-project-column':w['projectColumnDesktop'],'work-phase-column':w['phaseColumn'],'work-group-gap':w['groupGap'],'work-safe-bottom':w['floatingToolbarSafeBottom'],'cv-hero-top':cv['heroPaddingTopDesktop'],'cv-section-gap':cv['sectionGapDesktop'],'cv-portrait':cv['portraitDesktop']}.items():out.append('  --ds-'+k+': '+str(value)+'px;')
-for key in ['frameMaxWidth','cardRadius','cardPaddingX','sectionPaddingY','cardGap']:
+for key in ['frameMaxWidth','framePaddingX','cardRadius','cardPaddingX','sectionPaddingY','cardGap']:
  import re
  name=re.sub(r'(?<!^)(?=[A-Z])','-',key).lower()
  out.append('  --ds-workspace-'+name+': '+str(p['workspace'][key])+'px;')
